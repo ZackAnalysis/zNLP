@@ -11,7 +11,6 @@ from bokeh.palettes import Category20
 from bokeh.transform import factor_cmap
 import warnings
 from textblob import TextBlob
-import en_core_web_sm
 warnings.filterwarnings('ignore')
 # nlp = spacy.load('en_core_web_sm')
 nlp = en_core_web_sm.load()

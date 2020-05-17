@@ -10,6 +10,7 @@ from bokeh.models import ColumnDataSource
 from bokeh.palettes import Category20
 from bokeh.transform import factor_cmap
 import warnings
+from zText import en_core_web_sm
 from textblob import TextBlob
 warnings.filterwarnings('ignore')
 # nlp = spacy.load('en_core_web_sm')

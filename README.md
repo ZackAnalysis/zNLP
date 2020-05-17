@@ -1,8 +1,6 @@
 # zText
 
 ## install
-`pip3 install git+https://github.com/rel8edto/kumihotools.git`
-
-`pip3 install zText
+`pip3 install https://github.com/ZackAnalysis/zText.git`
 
 a nlp tool

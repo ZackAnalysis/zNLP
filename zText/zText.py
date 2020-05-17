@@ -10,11 +10,13 @@ from bokeh.models import ColumnDataSource
 from bokeh.palettes import Category20
 from bokeh.transform import factor_cmap
 import warnings
-from models import en_core_web_sm
 from textblob import TextBlob
 warnings.filterwarnings('ignore')
 # nlp = spacy.load('en_core_web_sm')
-nlp = en_core_web_sm.load()
+try:
+  nlp = spacy.load('en')
+except:
+  print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
 pyLDAvis.enable_notebook()
 
 

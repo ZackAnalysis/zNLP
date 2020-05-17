@@ -1,2 +1,2 @@
-# zNLP
+# zText
 a nlp tool

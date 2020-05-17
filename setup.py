@@ -19,7 +19,6 @@ setuptools.setup(
     ],
     packages=setuptools.find_packages(),
     install_requires=["IPython","bokeh","pandas","xlrd","gensim","spacy",
-        "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz",
         "textacy","textblob","pyvis","pyLDAvis"],
     python_requires='>=3.6',
 )

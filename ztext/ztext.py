@@ -6,6 +6,7 @@
 # import pandas as pd
 import warnings,IPython, spacy
 from tqdm import tqdm
+import pandas as pd
 
 
 warnings.filterwarnings('ignore')
@@ -16,7 +17,7 @@ def sampledata():
 
     
 class Ztext:
-    def __init__(self,df,textCol,nTopics=5,custom_stopwrods=[], samplesize=None):
+    def __init__(self,df=None,textCol='',nTopics=5,custom_stopwrods=[], samplesize=None):
         try:
             nlp = spacy.load('en_core_web_sm')
         except:
@@ -39,13 +40,50 @@ class Ztext:
         self.ldaVis = None
         self.svodfs = {}
     
+    def loadfile(self, filename,textCol=None):
+        filetype = filename.split('.')[-1]
+        if textCol:
+            self.textCol = textCol
+        if filetype not in ['csv','xlsx','json']:
+            print(f'filetype .{filetype} not supported')
+            return
+        if filetype == 'csv':
+            self.df = pd.read_csv(filename)
+        if filetype == 'xlsx':
+            self.df = pd.read_xlsx(filename)
+        if filetype == 'json':
+            self.df = pd.read_json(filename)
+    
+    def loaddf(self, df,textCol=None):
+        if textCol:
+            self.textCol = textCol
+        if isinstance(df,pd.DataFrame):
+            self.df = df
+        else:
+            print('Please load a pandas dataframe.')
+    
+    def setcol(self,textCol):
+        self.textCol = textCol
+
+    def checkdf(self):
+        if self.df is None:
+            print('loadfile or dataframe first')
+            return False
+        if self.textCol is None or not textCol:
+            print('set the textColname first, by using Ztext.setcol("Colname")')
+            return False
+
     def sentiment(self):
+        if self.check() == False:
+            return
         print('sentment analyzing ...')
         from ztext.nlpsteps.sentimentSocre import sentimentSocre
         self.df['sentimentScore'] = self.df[self.textCol].apply(sentimentSocre)
         return self.df
 
     def clean(self):
+        if self.check() == False:
+            return
         print('cleaning text ...')
         from ztext.nlpsteps.text_clean import text_clean
         for n in tqdm(self.df.index):
@@ -54,7 +92,8 @@ class Ztext:
         return self.df
 
     def get_topics(self, nTopics=None):
-        
+        if self.check() == False:
+            return
         if not nTopics:
             nTopics = self.nTopics
         from ztext.nlpsteps.topicAnalysis import topic_analysis
@@ -67,6 +106,8 @@ class Ztext:
         return self.df
 
     def getldaVis(self):
+        if self.check() == False:
+            return
         from ztext.nlpsteps.topicAnalysis import getldaVis
         
         if self.model is None or self.tokens is None:
@@ -76,6 +117,8 @@ class Ztext:
         return self.ldaVis
 
     def topicCount(self):
+        if self.check() == False:
+            return
         from ztext.nlpsteps.topicAnalysis import plot_topics
         if self.topicDescribe is None:
             print('applying LDA analysis first')
@@ -85,6 +128,8 @@ class Ztext:
 
 
     def getSVO(self, topicN='topic1',clean=False):
+        if self.check() == False:
+            return
         from ztext.nlpsteps.svo import SVO  
         if 'KeyTopic' not in self.df:
             print('Topic analysis must run first. ')
@@ -97,6 +142,8 @@ class Ztext:
          
     
     def SVOall(self, topicCol='KeyTopic',clean=False):
+        if self.check() == False:
+            return
         if clean:
             self.svodfs = {}
         from ztext.nlpsteps.svo import SVO  
@@ -113,6 +160,8 @@ class Ztext:
         return self.svodfs
     
     def getSVOvis(self, topic='topic1',options='entity'): # option could be "entity", "person", "any"
+        if self.check() == False:
+            return
         from ztext.nlpsteps.svo import visSVO
         if topic not in self.svodfs:
             print('Must run SVO extraction first')
@@ -125,6 +174,8 @@ class Ztext:
         return
 
     def getAllentities(self):
+        if self.check() == False:
+            return
         import pandas as pd
         SVOall()
         return pd.concat([svodfs.values()])

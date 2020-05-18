@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ztext
-Version: 0.0.5
+Version: 0.0.6
 Summary: An easy to use NLP tool
 Home-page: https://github.com/ZackAnalysis/ztext
 Author: Zack Dai
@@ -9,6 +9,10 @@ License: UNKNOWN
 Description: # ztext
         
         ## install
+        
+        `pip install ztext`
+        
+        from source:
         `pip3 install https://github.com/ZackAnalysis/ztext.git`
         
         a nlp tool

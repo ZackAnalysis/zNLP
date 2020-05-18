@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ztext", # Replace with your own username
-    version="0.0.5",
+    version="0.0.6",
     author="Zack Dai",
     author_email="zdai@brocku.ca",
     description="An easy to use NLP tool",

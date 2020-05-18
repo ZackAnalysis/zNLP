@@ -112,7 +112,7 @@ class Ztext:
             self.getSVO(topic)
         return self.svodfs
     
-    def getSVOvis(self, topic='topic1'):
+    def getSVOvis(self, topic='topic1',options='entity'): # option could be "entity", "person", "any"
         from ztext.nlpsteps.svo import visSVO
         if topic not in self.svodfs:
             print('Must run SVO extraction first')

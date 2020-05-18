@@ -116,7 +116,7 @@ class Ztext:
         if topic not in self.svodfs:
             print('Must run SVO extraction first')
             self.getSVO(topic)
-        print('creating SVO file')
+        print('creating SVO Visualization file')
         visSVO(self.svodfs[topic],topic)
         return
 

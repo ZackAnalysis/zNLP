@@ -84,7 +84,7 @@ class Ztext:
         # to do add none notebook here
 
 
-    def getSVO(self, topicN='topic1'):
+    def getSVO(self, topicN='topic1',clean=False):
         from ztext.nlpsteps.svo import SVO  
         print('This function only run single topic, use SVOall to analyze all topics')
         if 'KeyTopic' not in self.df:
@@ -97,7 +97,9 @@ class Ztext:
         return svodf
          
     
-    def SVOall(self, topicCol='KeyTopic'):
+    def SVOall(self, topicCol='KeyTopic',clean=False):
+        if clean:
+            self.svodfs = {}
         from ztext.nlpsteps.svo import SVO  
         if 'KeyTopic' not in self.df:
             print('Topic analysis must run first. ')
@@ -116,11 +118,17 @@ class Ztext:
         if topic not in self.svodfs:
             print('Must run SVO extraction first')
             self.getSVO(topic)
+        if len(svodfs[topic]) == 0:
+            print('no entity detected in the corpus, try another topic')
+            return
         print('creating SVO Visualization file')
         visSVO(self.svodfs[topic],topic)
         return
 
-
+    def getAllentities(self):
+        import pandas as pd
+        SVOall()
+        return pd.concat([svodfs.values()])
 
 
 # if __name__ == '__main__':

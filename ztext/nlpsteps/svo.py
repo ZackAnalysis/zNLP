@@ -54,6 +54,9 @@ def visSVO(svodf, filename='', options='entity'): # option could be "entity", "p
   from IPython.display import HTML, display
   filename = f'network_{filename}.html'
   print('creating ', filename, '...')
+  if len(svodf) <1:
+    print('no entity in the dataframe, try another one')
+    return 
   if options in ["entity","person"]: # check options
     svodf=svodf.dropna(subset=['SubjectType']).reset_index(drop=True) # remove non Type subjects
     if options == "person": # check options

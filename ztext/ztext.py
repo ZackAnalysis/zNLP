@@ -129,7 +129,7 @@ class Ztext:
         from ztext.nlpsteps.topicAnalysis import plot_topics
         if self.topicDescribe is None:
             print('applying LDA analysis first')
-            self.topic_analysis()
+            self.get_topics()
         plot_topics(self.topic_analysis)
         # to do add none notebook here
 

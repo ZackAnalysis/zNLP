@@ -1,10 +1,10 @@
 import spacy, textacy, pyvis
 import pandas as pd
+from textblob import TextBlob
+from tqdm import tqdm
 
 import warnings
 warnings.filterwarnings('ignore')
-
-
 
 
 def SVO(text, sentiment=False): # return SVO table from given text

@@ -15,7 +15,7 @@ def sampledata():
 
     
 class Ztext:
-    def __init__(self,df,textCol,nTopics=5, samplesize=None):
+    def __init__(self,df,textCol,nTopics=5,custom_stopwrods=[], samplesize=None):
         try:
             nlp = spacy.load('en_core_web_sm')
         except:
@@ -29,6 +29,7 @@ class Ztext:
         self.df = df
         self.textCol = textCol
         self.nTopics = nTopics
+        self.custom_stopwrods = custom_stopwrods
         self.doctopics = None
         self.topicDescribe = None
         self.dictionary = None
@@ -46,7 +47,7 @@ class Ztext:
     def clean(self):
         print('cleaning text ...')
         from ztext.nlpsteps.text_clean import text_clean
-        self.df['cleaned_text'] = self.df[self.textCol].apply(text_clean)
+        self.df['cleaned_text'] = self.df[self.textCol].apply(text_clean, custom_stopwrods=self.custom_stopwrods)
         return self.df
 
     def get_topics(self, nTopics=None):
@@ -86,9 +87,10 @@ class Ztext:
         if 'KeyTopic' not in self.df:
             print('Topic analysis must run first. ')
             self.get_topics()
+        print('getting SVO for ', topicN)
         text = '\n'.join(self.df.loc[self.df['KeyTopic']==topicN,self.textCol])
         svodf = SVO(text)
-        self.svodfs[topic] = svodf
+        self.svodfs[topicN] = svodf
         return svodf
          
     

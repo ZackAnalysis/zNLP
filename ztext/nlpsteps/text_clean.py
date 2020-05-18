@@ -1,6 +1,5 @@
-import spacy
-
-import warnings
+import spacy,warnings
+from tqdm import tqdm
 
 warnings.filterwarnings('ignore')
 
@@ -14,5 +13,10 @@ def text_clean(text, custom_stopwrods=[], toLower=True):
   if toLower:
     text=text.lower()
   doc = nlp(text)
-  return ' '.join([d.lemma_ for d in doc if \
-    all([2<len(d.text)<20,d.is_alpha, not d.is_stop, d.lemma_ not in custom_stopwrods])])
+  # return ' '.join([d.lemma_ for d in doc if \
+  #   all([2<len(d.text)<20,d.is_alpha, not d.is_stop, d.lemma_ not in custom_stopwrods])])
+  cleandoc = []
+  for token in tqdm(doc):
+    if all([2<len(token.text)<20,token.is_alpha, not token.is_stop, token.lemma_ not in custom_stopwrods]):
+      cleandoc.append(token.lemma_)
+  return ' '.join(cleandoc)

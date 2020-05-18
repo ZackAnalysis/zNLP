@@ -24,6 +24,7 @@ class Ztext:
         self.nTopics = nTopics
         self.doctopics = None
         self.topicDescribe = None
+        self.dictionary = None
         self.model = None
         self.tokens = None
         self.ldaVis = None
@@ -50,7 +51,7 @@ class Ztext:
             print('data need to be cleaned first, cleaning the data')
             self.clean()
         print('getting topics ...')
-        self.doctopics, self.topicDescribe, self.model, self.tokens= topic_analysis(self.df, nTopics,'cleaned_text')
+        self.doctopics, self.topicDescribe, self.model, self.tokens, self.dictionary= topic_analysis(self.df, nTopics,'cleaned_text')
         self.df = self.df.merge(self.doctopics, left_index=True, right_index=True)
         return self.df
 
@@ -81,7 +82,7 @@ class Ztext:
         return SVO(text)
          
     
-    def SVOall(topicCol='KeyTopic'):
+    def SVOall(self, topicCol='KeyTopic'):
         if 'KeyTopic' not in self.df:
             print('topic analysis must run first. quit')
             return

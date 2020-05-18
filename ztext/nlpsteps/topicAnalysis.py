@@ -39,7 +39,7 @@ def topic_analysis(df, nTopics=5, cleanTextCol='cleaned_text'):
     col != 'KeyTopic']]
   
   doctopics= doctopics.merge(topicDescribe[['KeyTopic','TopicKeywords']], on='KeyTopic', how='left')
-  return doctopics, topicDescribe, model, tokens
+  return doctopics, topicDescribe, model, tokens, dictionary
 
 
 def getldaVis(model, tokens):

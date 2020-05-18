@@ -62,7 +62,12 @@ from pandas dataframe
 
 #### Visulzation
 `zt.getldaVis()`
+
 `zt.getSVOvis('topic2',options="any")`
+
+#### save output
+
+`zt.df.to_excel('filename.xlsx`)`
 
 
 

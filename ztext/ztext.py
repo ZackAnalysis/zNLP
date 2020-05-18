@@ -11,7 +11,7 @@ warnings.filterwarnings('ignore')
 
 def sampledata():
     import pandas as pd
-    return pd.read_excel('sampleData.xlsx')
+    return pd.read_excel('https://github.com/ZackAnalysis/ztext/blob/master/ztext/sampleData.xlsx?raw=true')
 
     
 class Ztext:

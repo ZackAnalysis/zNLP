@@ -6,6 +6,9 @@ from tqdm import tqdm
 import warnings
 warnings.filterwarnings('ignore')
 
+def getlabel(x):
+  return [y.label_ for y in x.ents] \
+    if [y.label_ for y in x.ents] else None
 
 def SVO(text, sentiment=False): # return SVO table from given text
   try:
@@ -21,9 +24,36 @@ def SVO(text, sentiment=False): # return SVO table from given text
   out = [] # prepare an empty list to receive result
   with tqdm(total=(len(list(doc.sents)))) as tm:
     for sent in doc.sents: # loop each sentence in the text
-      '''
-      todo filter sent by ent
-      '''
+      out = []
+      for sent in doc.sents:
+        elements = list(textacy.extract.subject_verb_object_triples(sent))
+        if elements:
+          for element in elements:
+            element = {'Subject':element[0].text,'SubjectType': getlabel(element[0]),
+                      'Verb':element[1].text, 'Object':element[2].text, 'ObjectType':getlabel(element[2])}
+            score = TextBlob(' '.join([d.text for d in sent])).sentiment.polarity
+            element['sentiment'] = score
+            out.append(element)
+      tm.update()
+  return pd.DataFrame(out)
+
+def SVOold(text, sentiment=False): # return SVO table from given text
+  try:
+    nlp = spacy.load('en_core_web_sm')
+  except:
+    print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
+    return
+  if not text: 
+    print('no text found') # empty text warning
+    return
+  doc = nlp(text) 
+  print('found ',len(list(doc.sents)), 'sentences in the corpus, extracting items')
+  out = [] # prepare an empty list to receive result
+  with tqdm(total=(len(list(doc.sents)))) as tm:
+    for sent in doc.sents: # loop each sentence in the text
+      if len(list(sent.ents))<0:
+        pass
+        tm.update()
       elements = list(textacy.extract.subject_verb_object_triples(sent))
       # generate svo list
       if sentiment: # check whether need return sentiments

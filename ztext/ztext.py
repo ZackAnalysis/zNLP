@@ -49,7 +49,7 @@ class Ztext:
         print('cleaning text ...')
         from ztext.nlpsteps.text_clean import text_clean
         for n in self.df.index:
-            self.df.loc[n,'cleaned_text'] = text_clean(self.df.loc[n,textCol])
+            self.df.loc[n,'cleaned_text'] = text_clean(self.df.loc[n,self.textCol])
         # self.df['cleaned_text'] = self.df[self.textCol].apply(text_clean, custom_stopwrods=self.custom_stopwrods)
         return self.df
 

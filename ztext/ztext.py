@@ -14,7 +14,7 @@ def sampledata():
     return pd.read_excel('ztext/ztext/sampleData.xlsx')
 
     
-class Nlpdf:
+class Ztext:
     def __init__(self,df,textCol,nTopics=5, samplesize=None):
         if samplesize:
             print('')

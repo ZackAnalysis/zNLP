@@ -40,7 +40,9 @@ class Ztext:
         self.ldaVis = None
         self.svodfs = {}
     
-    def loadfile(self, filename,textCol=None):
+    def loadfile(self, filename,nTopics=5,custom_stopwrods=[], samplesize=None):
+        if filename.endswith("?raw=true"):
+            filename = filename.replace("?raw=true",'')
         filetype = filename.split('.')[-1]
         if textCol:
             self.textCol = textCol
@@ -50,9 +52,11 @@ class Ztext:
         if filetype == 'csv':
             self.df = pd.read_csv(filename)
         if filetype == 'xlsx':
-            self.df = pd.read_xlsx(filename)
+            self.df = pd.read_excel(filename)
         if filetype == 'json':
             self.df = pd.read_json(filename)
+        if samplesize:
+            self.df = self.df.sample(samplesize)
     
     def loaddf(self, df,textCol=None):
         if textCol:

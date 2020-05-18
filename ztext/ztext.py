@@ -65,6 +65,9 @@ class Ztext:
     def setcol(self,textCol):
         self.textCol = textCol
 
+    def setNtopics(n):
+        self.ntopics = n
+
     def checkdf(self):
         if self.df is None:
             print('loadfile or dataframe first')

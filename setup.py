@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="zText", # Replace with your own username
-    version="0.0.3",
+    name="ztext", # Replace with your own username
+    version="0.0.1",
     author="Zack Dai",
     author_email="zdai@brocku.ca",
     description="An easy to use NLP tool",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ZackAnalysis/zText",
+    url="https://github.com/ZackAnalysis/ztext",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

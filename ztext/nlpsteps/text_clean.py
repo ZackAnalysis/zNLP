@@ -1,10 +1,13 @@
 import spacy
 
+import warnings
+
+warnings.filterwarnings('ignore')
+
 try:
   nlp = spacy.load('en_core_web_sm')
 except:
   print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
-pyLDAvis.enable_notebook()
 
 
 

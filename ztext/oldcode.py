@@ -20,7 +20,6 @@ except:
 pyLDAvis.enable_notebook()
 
 
-
 #Step 1 add sentiment column
 def sentimentSocre(text):
   blob = TextBlob(text)
@@ -37,7 +36,7 @@ def text_clean(text, custom_stopwrods=[], toLower=True):
 # Step3 Topic Analysis
 
 def topic_analysis(cleanCol, nTopics=5):
-  cleandata = df['clearned_text'].apply(lambda x: x.split(' '))
+  cleandata = df['cleaned_text'].apply(lambda x: x.split(' '))
   dictionary = corpora.Dictionary(cleandata)
   tokens = [dictionary.doc2bow(d) for d in cleandata]
   model = LdaModel(tokens, num_topics=nTopics, id2word=dictionary, 
@@ -157,9 +156,9 @@ if __name__ == '__main__':
 
   df['sentimentScore'] = df[textCol].apply(sentimentSocre)
 
-  df['clearned_text'] = df[textCol].apply(text_clean)
+  df['cleaned_text'] = df[textCol].apply(text_clean)
 
-  doctopics, topicDescribe, ldaVis = topic_analysis(df['clearned_text'], nTopics)
+  doctopics, topicDescribe, ldaVis = topic_analysis(df['cleaned_text'], nTopics)
   df = df.merge(doctopics, left_index=True, right_index=True)
 
   topicSVOs = docSVO(df)

@@ -8,6 +8,8 @@ Functions:
   4. NER (Entity extraction)
   5. Topic and SVO visualization (for now Visualization only support run in Jupyter notebook and Colab)
 
+![ztext](https://raw.githubusercontent.com/ZackAnalysis/ztext/master/ztextdemo.png)
+
 ## install
 
 In python3.6 or later environment

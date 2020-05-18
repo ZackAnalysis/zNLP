@@ -17,7 +17,7 @@ def SVO(text, sentiment=False): # return SVO table from given text
     print('no text found') # empty text warning
     return
   doc = nlp(text) 
-  print('found ',len(doc.sents), 'sentences in the corpus, extracting items')
+  print('found ',len(list(doc.sents)), 'sentences in the corpus, extracting items')
   out = [] # prepare an empty list to receive result
   with tqdm(total=(len(list(doc.sents)))) as tm:
     for sent in doc.sents: # loop each sentence in the text

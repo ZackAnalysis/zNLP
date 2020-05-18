@@ -73,7 +73,7 @@ def visSVO(svodf, filename='', options='entity'): # option could be "entity", "p
     net.add_edge(nodeAll.index(svodf.loc[i,'Subject']),nodeAll.index(svodf.loc[i,'Object']),
      label=svodf.loc[i,'Verb'], title=str(i))
   net.show(filename) # save the graph to file "network.html"
-  print(filename, 'saved\nUse IPython.display("%s") to view the graph.' % filename )
+  print(filename, 'saved\nUse IPython.display.HTML("%s") to view the graph.' % filename )
   return filename
 
 def SVOall(df, textCol='KeyTopic'):

@@ -40,7 +40,7 @@ class Ztext:
         self.ldaVis = None
         self.svodfs = {}
     
-    def loadfile(self, filename,nTopics=5,custom_stopwrods=[], samplesize=None):
+    def loadfile(self, filename,textCol='',nTopics=5,custom_stopwrods=[], samplesize=None):
         if filename.endswith("?raw=true"):
             filename = filename.replace("?raw=true",'')
         filetype = filename.split('.')[-1]

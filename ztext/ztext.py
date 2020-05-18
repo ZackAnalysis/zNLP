@@ -81,7 +81,7 @@ class Ztext:
             return False
 
     def sentiment(self):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         print('sentment analyzing ...')
         from ztext.nlpsteps.sentimentSocre import sentimentSocre
@@ -89,7 +89,7 @@ class Ztext:
         return self.df
 
     def clean(self):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         print('cleaning text ...')
         from ztext.nlpsteps.text_clean import text_clean
@@ -99,7 +99,7 @@ class Ztext:
         return self.df
 
     def get_topics(self, nTopics=None):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         if not nTopics:
             nTopics = self.nTopics
@@ -113,7 +113,7 @@ class Ztext:
         return self.df
 
     def getldaVis(self):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         from ztext.nlpsteps.topicAnalysis import getldaVis
         
@@ -124,7 +124,7 @@ class Ztext:
         return self.ldaVis
 
     def topicCount(self):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         from ztext.nlpsteps.topicAnalysis import plot_topics
         if self.topicDescribe is None:
@@ -135,7 +135,7 @@ class Ztext:
 
 
     def getSVO(self, topicN='topic1',clean=False):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         from ztext.nlpsteps.svo import SVO  
         if 'KeyTopic' not in self.df:
@@ -149,7 +149,7 @@ class Ztext:
          
     
     def SVOall(self, topicCol='KeyTopic',clean=False):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         if clean:
             self.svodfs = {}
@@ -167,7 +167,7 @@ class Ztext:
         return self.svodfs
     
     def getSVOvis(self, topic='topic1',options='entity'): # option could be "entity", "person", "any"
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         from ztext.nlpsteps.svo import visSVO
         if topic not in self.svodfs:
@@ -181,7 +181,7 @@ class Ztext:
         return
 
     def getAllentities(self):
-        if self.check() == False:
+        if self.checkdf() == False:
             return
         import pandas as pd
         SVOall()

@@ -2,14 +2,13 @@ import spacy,warnings
 
 
 warnings.filterwarnings('ignore')
-
+try:
+  nlp = spacy.load('en_core_web_sm')
+except:
+  print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
 
 def text_clean(text, custom_stopwrods=[], toLower=True):
-  # try:
-  #   nlp = spacy.load('en_core_web_sm')
-  # except:
-  #   print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
-  #   return
+
   if toLower:
     text=text.lower()
   doc = nlp(text)

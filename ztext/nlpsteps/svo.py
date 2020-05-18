@@ -9,9 +9,7 @@ warnings.filterwarnings('ignore')
 def getlabel(x):
   return [y.label_ for y in x.ents] \
     if [y.label_ for y in x.ents] else None
-  
-def element2obj(element):
-  return 
+    
 
 def SVO(text, sentiment=False): # return SVO table from given text
   try:

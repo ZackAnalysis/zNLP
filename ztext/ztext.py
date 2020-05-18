@@ -118,7 +118,7 @@ class Ztext:
         if topic not in self.svodfs:
             print('Must run SVO extraction first')
             self.getSVO(topic)
-        if len(svodfs[topic]) == 0:
+        if len(self.svodfs[topic]) == 0:
             print('no entity detected in the corpus, try another topic')
             return
         print('creating SVO Visualization file')

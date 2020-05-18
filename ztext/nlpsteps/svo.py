@@ -28,7 +28,7 @@ def SVO(text, sentiment=False): # return SVO table from given text
       # generate svo list
       if sentiment: # check whether need return sentiments
         score = TextBlob(' '.join([d.text for d in sent])).sentiment.polarity
-        # return sentment score for the sentence
+        # return sentment score for the sentencezt
         elements = [(e[0],e[1],e[2], score) for e in elements]
         # reoganize the sentence analysis result
       out += elements # add sentence result to the output list 
@@ -51,7 +51,7 @@ def SVO(text, sentiment=False): # return SVO table from given text
   return svodf
 
 def visSVO(svodf, filename='', options='entity'): # option could be "entity", "person", "any"
-
+  from IPython.display import HTML, display
   filename = f'network_{filename}.html'
   print('creating ', filename, '...')
   if options in ["entity","person"]: # check options
@@ -73,7 +73,7 @@ def visSVO(svodf, filename='', options='entity'): # option could be "entity", "p
     net.add_edge(nodeAll.index(svodf.loc[i,'Subject']),nodeAll.index(svodf.loc[i,'Object']),
      label=svodf.loc[i,'Verb'], title=str(i))
   net.show(filename) # save the graph to file "network.html"
-  print(filename, 'saved\nUse IPython.display.HTML("%s") to view the graph.' % filename )
+  display(HTML(filename))
   return filename
 
 def SVOall(df, textCol='KeyTopic'):

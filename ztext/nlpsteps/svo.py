@@ -18,7 +18,7 @@ def SVO(text, sentiment=False): # return SVO table from given text
     return
   doc = nlp(text) 
   out = [] # prepare an empty list to receive result
-  for sent in doc.sents: # loop each sentence in the text
+  for sent in tqdm(doc.sents): # loop each sentence in the text
     '''
     todo filter sent by ent
     '''

@@ -5,7 +5,8 @@
 
 # import pandas as pd
 import warnings,IPython, spacy
-# from tqdm import tqdm
+from tqdm import tqdm
+
 
 warnings.filterwarnings('ignore')
 
@@ -47,7 +48,9 @@ class Ztext:
     def clean(self):
         print('cleaning text ...')
         from ztext.nlpsteps.text_clean import text_clean
-        self.df['cleaned_text'] = self.df[self.textCol].apply(text_clean, custom_stopwrods=self.custom_stopwrods)
+        for n in self.df.index:
+            self.df.loc[n,'cleaned_text'] = text_clean(self.df.loc[n,textCol])
+        # self.df['cleaned_text'] = self.df[self.textCol].apply(text_clean, custom_stopwrods=self.custom_stopwrods)
         return self.df
 
     def get_topics(self, nTopics=None):

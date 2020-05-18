@@ -65,7 +65,7 @@ class Ztext:
     def setcol(self,textCol):
         self.textCol = textCol
 
-    def setNtopics(n):
+    def setNtopics(self,n):
         self.ntopics = n
 
     def checkdf(self):

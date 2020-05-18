@@ -55,10 +55,10 @@ from pandas dataframe
 #### Topic analysis:
 `zt.get_topics()`
 
-####SVO and NER
+#### SVO and NER
 `zt.getSVO('topic2')`
 
-####Visulzation
+#### Visulzation
 `zt.getldaVis()`
 `zt.getSVOvis('topic2',options="any")`
 

@@ -4,7 +4,7 @@
 # from ztext.nlpsteps import text_clean, sentimentSocre, topic_analysis,plot_topics,svo
 
 # import pandas as pd
-import warnings,IPython
+import warnings,IPython, spacy
 # from tqdm import tqdm
 
 warnings.filterwarnings('ignore')
@@ -16,6 +16,13 @@ def sampledata():
     
 class Ztext:
     def __init__(self,df,textCol,nTopics=5, samplesize=None):
+        try:
+            nlp = spacy.load('en_core_web_sm')
+        except:
+            print('Please make sure spacy model is loaded.\n\
+                    Install spacy model first by running\n\
+                    python -m spacy download en_core_web_sm')
+            return
         if samplesize:
             print('')
             df = df.sample(samplesize)
@@ -28,7 +35,7 @@ class Ztext:
         self.model = None
         self.tokens = None
         self.ldaVis = None
-        self.svodfs = None
+        self.svodfs = {}
     
     def sentiment(self):
         print('sentment analyzing ...')
@@ -60,7 +67,7 @@ class Ztext:
         
         if self.model is None or self.tokens is None:
             print('applying LDA analysis first')
-            self.topic_analysis()
+            self.get_topics()
         self.ldaVis = getldaVis(self.model, self.tokens)
         return self.ldaVis
 
@@ -74,23 +81,41 @@ class Ztext:
 
 
     def getSVO(self, topicN='topic1'):
+        from ztext.nlpsteps.svo import SVO  
+        print('This function only run single topic, use SVOall to analyze all topics')
         if 'KeyTopic' not in self.df:
-            print('topic analysis must run first. quit')
-            return
+            print('Topic analysis must run first. ')
+            self.get_topics()
         text = '\n'.join(self.df.loc[self.df['KeyTopic']==topicN,self.textCol])
-        from ztext.nlpsteps.svo import SVO    
-        return SVO(text)
+        svodf = SVO(text)
+        self.svodfs[topic] = svodf
+        return svodf
          
     
     def SVOall(self, topicCol='KeyTopic'):
+        from ztext.nlpsteps.svo import SVO  
         if 'KeyTopic' not in self.df:
-            print('topic analysis must run first. quit')
-            return
-        self.svodfs = {}
+            print('Topic analysis must run first. ')
+            self.get_topics()
+        print('Starting SVO extraction for all topics...')
         for topic in self.df[topicCol].unique():
+            if topic in self.svodfs:
+                print('SVO dateframe for ', topic, 'already exists, next.')
+                continue
             print('analyzing ', topic, '...')
-            self.svodfs[topic] = self.getSVO(topic)
+            self.getSVO(topic)
         return self.svodfs
+    
+    def getSVOvis(self, topic='topic1'):
+        from ztext.nlpsteps.svo import visSVO
+        if topic not in self.svodfs:
+            print('Must run SVO extraction first')
+            self.getSVO(topic)
+        print('creating SVO file')
+        visSVO(self.svodfs[topic],topic)
+        return
+
+
 
 
 # if __name__ == '__main__':

@@ -4,13 +4,15 @@ import pandas as pd
 import warnings
 warnings.filterwarnings('ignore')
 
-nlp = spacy.load('en_core_web_sm')
-try:
-  nlp = spacy.load('en_core_web_sm')
-except:
-  print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
+
+
 
 def SVO(text, sentiment=False): # return SVO table from given text
+  try:
+    nlp = spacy.load('en_core_web_sm')
+  except:
+    print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
+    return
   if not text: 
     print('no text found') # empty text warning
     return

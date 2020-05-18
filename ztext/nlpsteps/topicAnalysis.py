@@ -43,7 +43,7 @@ def topic_analysis(df, nTopics=5, cleanTextCol='cleaned_text'):
 
 
 def getldaVis(model, tokens):
-  import pyLDAvis
+  import pyLDAvis.gensim
   try:
     pyLDAvis.enable_notebook()
   except:

@@ -1,7 +1,7 @@
 #pip install IPython bokeh pandas xlrd gensim spacy textacy textblob pyvis pyLDAvis
 # python -m spacy download en_core_web_sm
 
-# from nlpsteps import text_clean, sentimentSocre, topic_analysis,plot_topics,svo
+# from ztext.nlpsteps import text_clean, sentimentSocre, topic_analysis,plot_topics,svo
 
 # import pandas as pd
 import warnings,IPython
@@ -31,13 +31,13 @@ class Ztext:
     
     def sentiment(self):
         print('sentment analyzing ...')
-        from nlpsteps.sentimentSocre import sentimentSocre
+        from ztext.nlpsteps.sentimentSocre import sentimentSocre
         self.df['sentimentScore'] = self.df[self.textCol].apply(sentimentSocre)
         return self.df
 
     def clean(self):
         print('cleaning text ...')
-        from nlpsteps.text_clean import text_clean
+        from ztext.nlpsteps.text_clean import text_clean
         self.df['cleaned_text'] = self.df[self.textCol].apply(text_clean)
         return self.df
 
@@ -45,7 +45,7 @@ class Ztext:
         
         if not nTopics:
             nTopics = self.nTopics
-        from nlpsteps.topicAnalysis import topic_analysis
+        from ztext.nlpsteps.topicAnalysis import topic_analysis
         if 'cleaned_text' not in self.df:
             print('data need to be cleaned first, cleaning the data')
             self.clean()
@@ -55,7 +55,7 @@ class Ztext:
         return self.df
 
     def getldaVis(self):
-        from nlpsteps.topicAnalysis import getldaVis
+        from ztext.nlpsteps.topicAnalysis import getldaVis
         
         if self.model is None or self.tokens is None:
             print('applying LDA analysis first')
@@ -64,7 +64,7 @@ class Ztext:
         return self.ldaVis
 
     def topicCount(self):
-        from nlpsteps.topicAnalysis import plot_topics
+        from ztext.nlpsteps.topicAnalysis import plot_topics
         if self.topicDescribe is None:
             print('applying LDA analysis first')
             self.topic_analysis()
@@ -77,7 +77,7 @@ class Ztext:
             print('topic analysis must run first. quit')
             return
         text = '\n'.join(self.df.loc[self.df['KeyTopic']==topicN,self.textCol])
-        from nlpsteps.svo import SVO    
+        from ztext.nlpsteps.svo import SVO    
         return SVO(text)
          
     

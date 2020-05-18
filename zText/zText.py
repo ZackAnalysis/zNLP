@@ -14,7 +14,7 @@ from textblob import TextBlob
 warnings.filterwarnings('ignore')
 # nlp = spacy.load('en_core_web_sm')
 try:
-  nlp = spacy.load('en')
+  nlp = spacy.load('en_core_web_sm')
 except:
   print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
 pyLDAvis.enable_notebook()
@@ -32,7 +32,7 @@ def text_clean(text, custom_stopwrods=[], toLower=True):
     text=text.lower()
   doc = nlp(text)
   return ' '.join([d.lemma_ for d in doc if \
-    all([3<len(d.text)<20,d.is_alpha, not d.is_stop, d.lemma_ not in custom_stopwrods])])
+    all([2<len(d.text)<20,d.is_alpha, not d.is_stop, d.lemma_ not in custom_stopwrods])])
 
 # Step3 Topic Analysis
 

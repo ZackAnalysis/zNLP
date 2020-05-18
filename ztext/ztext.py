@@ -76,7 +76,7 @@ class Ztext:
         if self.df is None:
             print('loadfile or dataframe first')
             return False
-        if self.textCol is None or not textCol:
+        if self.textCol is None or not self.textCol:
             print('set the textColname first, by using Ztext.setcol("Colname")')
             return False
 

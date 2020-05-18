@@ -86,7 +86,6 @@ class Ztext:
 
     def getSVO(self, topicN='topic1',clean=False):
         from ztext.nlpsteps.svo import SVO  
-        print('This function only run single topic, use SVOall to analyze all topics')
         if 'KeyTopic' not in self.df:
             print('Topic analysis must run first. ')
             self.get_topics()

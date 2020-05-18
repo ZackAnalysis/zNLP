@@ -9,6 +9,9 @@ warnings.filterwarnings('ignore')
 def getlabel(x):
   return [y.label_ for y in x.ents] \
     if [y.label_ for y in x.ents] else None
+  
+def element2obj(element):
+  return 
 
 def SVO(text, sentiment=False): # return SVO table from given text
   try:
@@ -31,8 +34,9 @@ def SVO(text, sentiment=False): # return SVO table from given text
           for element in elements:
             element = {'Subject':element[0].text,'SubjectType': getlabel(element[0]),
                       'Verb':element[1].text, 'Object':element[2].text, 'ObjectType':getlabel(element[2])}
-            score = TextBlob(' '.join([d.text for d in sent])).sentiment.polarity
-            element['sentiment'] = score
+            if sentiment:
+              score = TextBlob(' '.join([d.text for d in sent])).sentiment.polarity
+              element['sentiment'] = score
             out.append(element)
       tm.update()
   return pd.DataFrame(out)

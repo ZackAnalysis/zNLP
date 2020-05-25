@@ -10,6 +10,7 @@ except:
 def text_clean(text, custom_stopwrods=[], toLower=True):
   if not isinstance(text,str):
     print('type error not string type in the data please remove first\n',text)
+    return
   if toLower:
     text=text.lower()
   doc = nlp(text)

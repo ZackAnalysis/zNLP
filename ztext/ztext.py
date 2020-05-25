@@ -28,7 +28,7 @@ class Ztext:
         if samplesize:
             print('')
             df = df.sample(samplesize)
-        self.df = df
+        self.df = df.astype('str')
         self.textCol = textCol
         self.nTopics = nTopics
         self.custom_stopwrods = custom_stopwrods

@@ -8,7 +8,7 @@ except:
   print('Install spacy model first by running\npython -m spacy download en_core_web_sm')
 
 def text_clean(text, custom_stopwrods=[], toLower=True):
-  if not isnstance(text,str):
+  if not isinstance(text,str):
     print('type error not string type in the data please remove first\n',text)
   if toLower:
     text=text.lower()

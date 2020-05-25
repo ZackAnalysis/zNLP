@@ -20,7 +20,7 @@ In IPython, Jupyter notebook or Colab
 `!pip install ztext`
 
 from source:
-`pip3 install https://github.com/ZackAnalysis/ztext.git`
+`pip3 install git+https://github.com/ZackAnalysis/ztext.git`
 
 ## Quick Start
 

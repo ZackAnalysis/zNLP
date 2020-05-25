@@ -13,7 +13,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def topic_analysis(df, nTopics=5, cleanTextCol='cleaned_text'):
-  cleandata = df[cleanTextCol].apply(lambda x: x.split(' '))
+  df[cleanTextCol]=df[cleanTextCol].fillna('')
+  cleandata = df[cleanTextCol].fillna('').apply(lambda x: x.split(' '))
   dictionary = corpora.Dictionary(cleandata)
   tokens = [dictionary.doc2bow(d) for d in cleandata]
   model = LdaModel(tokens, num_topics=nTopics, id2word=dictionary, 

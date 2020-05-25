@@ -92,7 +92,7 @@ class Ztext:
         if self.checkdf() == False:
             return
         print('cleaning text ...')
-        df[self.textCol] = df[self.textCol].fillna('')
+        self.df[self.textCol] = self.df[self.textCol].fillna('')
         from ztext.nlpsteps.text_clean import text_clean
         for n in tqdm(self.df.index):
             self.df.loc[n,'cleaned_text'] = text_clean(self.df.loc[n,self.textCol])
